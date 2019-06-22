@@ -1,5 +1,4 @@
-const wsProtocol = document.location.protocol.replace('http', 'ws');
-const socket = new WebSocket(wsProtocol + '//' + document.location.host);
+const socket = new WebSocket(document.location.href.replace('http', 'ws'));
 
 const messageEl = document.getElementById('message');
 const responseEl = document.getElementById('response');

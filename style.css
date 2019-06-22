@@ -1,0 +1,65 @@
+body {
+  font: 18px Roboto, "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 12px 12px 30px 12px;
+}
+
+h1 {
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  height: 3em;
+  justify-content: center;
+  padding: 0.25em;
+}
+
+#message, #response {
+  font-size: 1.25em;
+  height: 2em;
+  line-height: 2em;
+  margin: 0.25em;
+  padding: 0.5em;
+  width: 15em;
+}
+
+#arrow {
+  font-size: 2em;
+  padding: 0 1em 0 1em;
+  user-select: none;
+}
+
+#errors {
+  font-family: "Roboto Mono", Consolas, monospace;
+  white-space: pre;
+}
+
+#errors:not(:empty)::before {
+  background-color: #ccc;
+  border-bottom: 1px solid #ccc;
+  color: black;
+  content: "Errors";
+  display: block;
+  font-weight: bold;
+  margin: -0.5em -0.5em 0.5em -0.5em;
+  padding: 0.5em;
+}
+
+#errors:not(:empty) {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: red;
+  margin-top: 3em;
+  padding: 0.5em;
+}
+
+#response {
+  background-color: #f4f4f4;
+  border: 1px solid #d0d0d0;
+  cursor: pointer;
+  display: inline-block;
+  user-select: all;
+}

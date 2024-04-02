@@ -1,14 +1,10 @@
 const http = require('http');
+const serveHandler = require('serve-handler');
 const websocket = require('websocket');
-const static = require('node-static');
 
-const staticFileServer = new static.Server('./');
-
-const server = http.createServer((request, response) => {
-  request.addListener('end', () => {
-    staticFileServer.serve(request, response);
-  }).resume();
-});
+const server = http.createServer((req, res) => serveHandler(req, res, {
+  public: './'
+}));
 
 const port = parseInt(process.env['PORT'] || '3000');
 

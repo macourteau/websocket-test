@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "serve-handler": "^6.1.5",
-    "websocket": "^1.0.28"
+    "websocket": "^1.0.35"
   }
 }

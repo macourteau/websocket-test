@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serve-handler": "^6.1.5",
+    "serve-handler": "^6.1.7",
     "websocket": "^1.0.35"
   }
 }

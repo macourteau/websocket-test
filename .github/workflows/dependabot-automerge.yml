@@ -1,0 +1,38 @@
+name: dependabot-automerge
+
+# The merge uses a PAT rather than GITHUB_TOKEN because events authored by
+# GITHUB_TOKEN do not start workflow runs: a GITHUB_TOKEN merge would push to
+# master without triggering ci, so the published image would stop tracking it.
+# WEBSOCKET_TEST_PUSH_TOKEN does not exist yet; the fallback keeps auto-merge
+# working until it is created.
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Every GitHub Actions bump auto-merges; npm bumps auto-merge up to
+      # minor, and a major waits for a human. The ci image build is the gate.
+      - name: Approve and enable auto-merge
+        if: >-
+          steps.metadata.outputs.package-ecosystem == 'github_actions' ||
+          steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: |
+          gh pr review --approve "$PR_URL"
+          gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.WEBSOCKET_TEST_PUSH_TOKEN || secrets.GITHUB_TOKEN }}

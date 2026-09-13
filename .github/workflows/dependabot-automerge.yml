@@ -4,7 +4,10 @@ name: dependabot-automerge
 # GITHUB_TOKEN do not start workflow runs: a GITHUB_TOKEN merge would push to
 # master without triggering ci, so the published image would stop tracking it.
 # WEBSOCKET_TEST_PUSH_TOKEN does not exist yet; the fallback keeps auto-merge
-# working until it is created.
+# working until it is created. Create it as a Dependabot secret, not an Actions
+# secret -- a Dependabot-triggered run reads only Dependabot secrets, so an
+# Actions secret resolves to empty and silently takes the fallback:
+#   gh secret set WEBSOCKET_TEST_PUSH_TOKEN --app dependabot
 
 on:
   pull_request:
